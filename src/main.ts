@@ -1,16 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import { ConfigService } from '@nestjs/config';
-import { AppConfigSchema } from './config/app.config';
+
+import { AppModule } from './app/app.module';
+import { AppConfigSchema, ResultConfigSchema } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const appConfig = app.get<ConfigService<AppConfigSchema>>(ConfigService);
+  const config = app.get<ConfigService<ResultConfigSchema>>(ConfigService);
+  const appConfig = config.get<AppConfigSchema>('appConfig')!;
 
-  const PORT = appConfig.get<AppConfigSchema['PORT']>('PORT')!;
-  const HOST = appConfig.get<AppConfigSchema['HOST']>('HOST')!;
-  const IS_DEV = appConfig.get<AppConfigSchema['IS_DEV']>('IS_DEV')!;
+  const PORT = appConfig['PORT'];
+  const HOST = appConfig['HOST'];
+  const IS_DEV = appConfig['IS_DEV'];
 
   await app.listen(PORT, HOST, () => {
     if (IS_DEV) {
