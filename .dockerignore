@@ -1,0 +1,11 @@
+.env
+.env.production
+.env.development
+.env.test
+.git
+node_modules
+dist
+*.log
+coverage
+Dockerfile*
+docker-compose*

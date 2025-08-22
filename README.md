@@ -1,98 +1,127 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Тестовое задание для Comfortel
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Задача:
+Создать API для получения информации о пользователе из базы данных.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Данные пользователя:\
+▸ Уникальный ID\
+▸ Логин\
+▸ ФИО\
+▸ Пол\
+▸ Возраст\
+▸ Контакты (телефон/e-mail)\
+▸ Аватар\
+▸ Дата регистрации\
+▸ Статус активности
 
-## Description
+Требования:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. Использовать PostgreSQL или MongoDB.
+2. Реализовать на TypeScript/Nest.js или Golang/Gin.
 
-## Project setup
+---
 
-```bash
-$ npm install
+## Стек
+
+- Node.js@22
+- TypeScript
+- Nest.js
+- PostgreSQL@15
+- Docker
+- Docker Compose
+
+## Настройка переменной окружения
+
+Для работы с базой данных необходимо создать файл `.env` в корневой папке проекта и указать следующие переменные:
+
+```env
+# Порт, на котором будет запущено приложение
+PORT=3000
+
+# Адрес, на котором будет запущено приложение
+# Для докер-контейнера указать 0.0.0.0
+# Для локального запуска можно использовать localhost
+HOST=0.0.0.0
+
+# Режим работы приложения (development или production)
+NODE_ENV=development
+
+# Порт PostgreSQL
+POSTGRES_PORT=5432
+
+# Адрес PostgreSQL (контейнер Docker)
+POSTGRES_HOST=postgres
+
+# Имя базы данных
+POSTGRES_DB=comfortel
+
+# Пользователь PostgreSQL
+POSTGRES_USER=postgres
+
+# Пароль пользователя PostgreSQL
+POSTGRES_PASSWORD=postgres
+
 ```
 
-## Compile and run the project
+## Установка и запуск
 
-```bash
-# development
-$ npm run start
+Убедиться, что установлены следующие инструменты:
 
-# watch mode
-$ npm run start:dev
+- [nvm](https://github.com/nvm-sh/nvm) или [Node.js](https://nodejs.org/)@22
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
 
-# production mode
-$ npm run start:prod
-```
+1.  Клонировать репозиторий:
 
-## Run tests
+    ```bash
+    git clone https://github.com/Taashev/comfortel.git
+    ```
 
-```bash
-# unit tests
-$ npm run test
+2.  Перейти в корневую папку проекта:
 
-# e2e tests
-$ npm run test:e2e
+    ```bash
+    cd comfortel
+    ```
 
-# test coverage
-$ npm run test:cov
-```
+3.  Если используется nvm, выполнить команду:
 
-## Deployment
+    ```bash
+    nvm install 22
+    nvm use
+    ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+4.  Запуск проекта с помощью Docker Compose в режиме разработки:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+    ```bash
+    npm run docker:dev
+    ```
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+5.  Запуск проекта с помощью Docker Compose в режиме продакшн:
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+    ```bash
+    npm run docker:prod
+    ```
 
-## Resources
+6.  Если необходимо запустить только PostgreSQL, можно использовать команду:
 
-Check out a few resources that may come in handy when working with NestJS:
+    ```bash
+    npm run docker:postgres
+    ```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+7.  Запуск приложения локально без Docker:
 
-## Support
+    ```bash
+    npm install
+    npm run start:dev
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    При этом убедитесь, что в файле `.env` указаны правильные параметры подключения к базе данных.
 
-## Stay in touch
+8.  Для очистки контейнеров и сетей Docker, используйте команду:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+    ```bash
+    npm run docker:clear
+    ```
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+9.  После запуска проекта, API будет доступен по адресу: [http://localhost:3000](http://localhost:3000)

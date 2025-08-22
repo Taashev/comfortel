@@ -23,9 +23,9 @@ const appConfigSchema = z.object({
 const dbConfigSchema = z.object({
   POSTGRES_PORT: z.coerce.number().default(3000),
   POSTGRES_HOST: z.string().default('localhost'),
-  POSTGRES_USERNAME: z.string(),
-  POSTGRES_POSSWORD: z.string(),
-  POSTGRES_DATABASE: z.string(),
+  POSTGRES_USER: z.string(),
+  POSTGRES_PASSWORD: z.string(),
+  POSTGRES_DB: z.string(),
 });
 
 const envSchema = appConfigSchema.extend(dbConfigSchema.shape);
@@ -54,9 +54,9 @@ export const appModuleConfig: ConfigModuleOptions<ResultConfigSchema> = {
     const dbConfig = {
       POSTGRES_PORT: env.POSTGRES_PORT,
       POSTGRES_HOST: env.POSTGRES_HOST,
-      POSTGRES_USERNAME: env.POSTGRES_USERNAME,
-      POSTGRES_POSSWORD: env.POSTGRES_POSSWORD,
-      POSTGRES_DATABASE: env.POSTGRES_DATABASE,
+      POSTGRES_USER: env.POSTGRES_USER,
+      POSTGRES_PASSWORD: env.POSTGRES_PASSWORD,
+      POSTGRES_DB: env.POSTGRES_DB,
     };
 
     return { appConfig, dbConfig };
