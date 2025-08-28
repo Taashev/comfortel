@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { appModuleConfig, DBConfigSchema } from '../config';
+import { appModuleConfig, DBConfigSchema } from '../../config';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
@@ -24,11 +26,11 @@ import { appModuleConfig, DBConfigSchema } from '../config';
           username: dbConfig.POSTGRES_USER,
           password: dbConfig.POSTGRES_PASSWORD,
           synchronize: false,
-          entities: [__dirname + '../**/*.entity.ts'],
-          migrations: [__dirname + '../database/migrations/*.migration.ts'],
+          entities: [join(__dirname, '../**/*.entity.{ts,js}')],
         };
       },
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

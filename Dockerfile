@@ -16,12 +16,6 @@ FROM node:22 AS dev
 
 WORKDIR /app
 
-ENV NODE_ENV=development
-
 COPY package*.json ./
 
-RUN npm ci
-
-VOLUME [ "/app/node_modules" ]
-
-CMD [ "npm", "run", "start:dev" ]
+RUN npm i
