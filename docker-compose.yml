@@ -6,17 +6,16 @@ networks:
   comfortel:
 
 services:
-  backend:
+  app_dev:
     build:
       context: .
       target: dev
     container_name: comfortel_backend
     depends_on:
       - postgres
-    env_file:
-      - .env
+    env_file: [.env]
     ports:
-      - '127.0.0.1:${PORT}:3000'
+      - '${PORT}:3000'
     environment:
       NODE_ENV: development
     volumes:
@@ -26,12 +25,35 @@ services:
       - comfortel
     profiles:
       - dev
+    command: sh -c "npm run migrate:run && npm run start:dev"
+
+  app_debug:
+    build:
+      context: .
+      target: dev
+    container_name: comfortel_backend
+    depends_on:
+      - postgres
+    env_file: [.env]
+    ports:
+      - '${PORT}:3000'
+      - '9229:9229'
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - comfortel
+    profiles:
+      - debug
+    command: sh -c "npm run migrate:run && npm run start:debug"
 
   postgres:
     image: postgres:15
     container_name: comfortel_postgres
     ports:
-      - '${POSTGRES_PORT}:5432'
+      - '5433:5432'
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

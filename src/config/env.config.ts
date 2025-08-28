@@ -1,6 +1,6 @@
 import z from 'zod';
 import { ConfigModuleOptions } from '@nestjs/config';
-import { validationZodSchemaOrFail } from '../utils/validation-zod';
+import { validationZodSchemaOrFail } from '../common/utils/validation-zod';
 
 export const envFilePath = [
   '.env.development',
