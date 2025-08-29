@@ -108,7 +108,7 @@ POSTGRES_PASSWORD=postgres
     Приложение монтируется в докер из локального хоста и крутиться там в одной сети с другими контейнерами.
 
     ```bash
-    npm run docker:dev
+    npm run docker:debug
     ```
 
     настройка дебагера для vscode
